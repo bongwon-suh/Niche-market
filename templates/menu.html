@@ -11,15 +11,11 @@
                 <a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>
             <li class="nav-item mx-1 btn btn-primary">
                 <a class="nav-link text-white"
-                   href="">Bookmark</a></li>
-            <li class="nav-item mx-1 btn btn-primary">
-                <a class="nav-link text-white"
-                   href="">Blog</a></li>
-            <li class="nav-item mx-1 btn btn-primary">
-                <a class="nav-link text-white" href="">Photo</a></li>
+                   href="">게시판</a></li>
+
             <li class="nav-item dropdown mx-1 btn btn-primary">
                 <a class="nav-link dropdown-toggle text-white" href="#"
-                   data-toggle="dropdown">Util</a>
+                   data-toggle="dropdown">시장 목록</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
                     <div class="dropdown-divider"></div>
@@ -28,6 +24,15 @@
                     <a class="dropdown-item" href="">Search</a>
                 </div>
             </li>
+
+            <li class="nav-item mx-1 btn btn-primary">
+                <a class="nav-link text-white"
+                   href="">점포 안내</a></li>
+
+            <li class="nav-item mx-1 btn btn-primary">
+                <a class="nav-link text-white"
+                   href="">로그인</a></li>
+
         </ul>
         <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
             <input class="form-control mr-sm-2" type="search"
