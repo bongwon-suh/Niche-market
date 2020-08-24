@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
+    'board.apps.BoardConfig',
+    'post.apps.PostConfig',
 ]
 
 MIDDLEWARE = [
@@ -84,9 +87,12 @@ DATABASES = {
     'HOST': 'localhost', # 서버 IP
     'PORT': '3306', # 포트번호
     'USER': 'user_app', # 사용자 ID
-    'PASSWORD': '1234' # 비밀번호
+    'PASSWORD': '1234', # 비밀번호
+
+    },
   }
-}
+
+
 
 
 
@@ -131,3 +137,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+LOGIN_REDIRECT_URL = '/' # 로그인 성공시 리다이렉트할 URL
+LOGOUT_REDIRECT_URL = '/' # 로그 아웃시 리다이렉트할 URL

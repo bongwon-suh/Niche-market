@@ -11,7 +11,10 @@
                 <a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>
             <li class="nav-item mx-1 btn btn-primary">
                 <a class="nav-link text-white"
-                   href="">게시판</a></li>
+                   href="{% url 'board:board_list' %}">게시판</a></li>
+                        <li class="nav-item mx-1 btn btn-primary">
+                <a class="nav-link text-white"
+                   href="{% url 'post:post_list' %}">게시판2</a></li>
 
             <li class="nav-item dropdown mx-1 btn btn-primary">
                 <a class="nav-link dropdown-toggle text-white" href="#"
@@ -26,17 +29,36 @@
             </li>
 
             <li class="nav-item mx-1 btn btn-primary">
-                <a class="nav-link text-white"
-                   href="">점포 안내</a></li>
+                <a class="nav-link text-white"href="">점포 안내</a></li>
 
-            <li class="nav-item mx-1 btn btn-primary">
-                <a class="nav-link text-white"
-                   href="">로그인</a></li>
 
         </ul>
         <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
             <input class="form-control mr-sm-2" type="search"
                    placeholder="global search" name="search_word">
         </form>
+
+        <ul class="navbar-nav ml-5 mr-5">
+            <li class="nav-item dropdown mx-1 btn btn-primary">
+                {% if user.is_active %}
+                <a class="nav-link dropdown-toggle text-white" href="#"
+                   data-toggle="dropdown">
+                    <i class="fas fa-user"></i>
+                    {{user.username }} </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호 변경</a>
+                </div>
+                {% else %}
+                <a class="nav-link dropdown-toggle text-white" href="#"
+                   data-toggle="dropdown">
+                    <i class="fas fa-user"></i>로그인</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                    <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                </div>
+                {% endif %}
+            </li>
+        </ul>
     </div>
 </nav>
