@@ -2,10 +2,15 @@
 {% block content %}
 <style>
     .content {
-
         text-align: center;
         height: 70%;
         width: 70%;
+        overflow-y: scroll;
+          -ms-overflow-style: none;  /* IE and Edge */
+           scrollbar-width: none;  /* Firefox */
+    }
+    .content::-webkit-scrollbar {
+         display: none;
     }
 
     .container-wrap>.container .row {
@@ -25,106 +30,124 @@
         width: 1px;
         background: #B2EBF4;
     }
+    .card {
+     color:rgba(255,255,255,1);
+    }
+
+
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
 </script>
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-<!--              1번째 카드-->
-            <div class="col-md-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">시장소개
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
-                    카드 바디
-                </div>
-              </div>
-            </div>
-              <!--              1번째 카드 끝-->
-<!--              2번째 카드-->
-            <div class="col-md-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">시장소개
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
-                    카드 바디
-                </div>
-              </div>
-            </div>
-<!--              2번째 카드 끝-->
-<!--              3번째 카드-->
-              <div class="col-md-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">시장소개
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
-                    카드 바디
-                </div>
-              </div>
-            </div>
-<!--              3번째 카드 끝-->
 
-          </div>
-          <div class="row">
-              <!--              2번째 열 1번째 카드 시작-->
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
-                <div class="card-header card-header-tabs card-header-primary">
-                  <div class="nav-tabs-navigation">
-                    <div class="nav-tabs-wrapper">
-                      <span class="nav-tabs-title">지도 올곳:</span>
+<div class="content">
+    <h1 style="text-align: left;">
+        {{market_detail.location}}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{market_detail.market_name}}</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <!--              1번째 카드-->
+            <div class="col-md-4">
+                <div class="card card-chart" style="background-color:rgba(38,94,171,0.6);">
+                    <div class="card-header card-header-success" style="text-align: left;"><i
+                            class="fas fa-sign-in-alt"> 시장소개</i></div>
+                    <div class="card-body">
+                        <p> 카트바디</p>
+                        <p> 카트바디</p>
                     </div>
-                  </div>
                 </div>
-                <div class="card-body">
-                </div>
-              </div>
             </div>
-<!--              2번째열 1번째 카드 끝-->
-<!--              2번째 열 2번째 카드 시작-->
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
-                <div class="card-header card-header-warning">
-                  <h4 class="card-title">Employees Stats</h4>
+            <!--              1번째 카드 끝-->
+            <!--              2번째 카드-->
+            <div class="col-md-4" onclick="location.href='/market/store/{{market_detail.id}}' ">
+                <div class="card card-chart" style="background-color:rgba(33,194,242,0.6);">
+                    <div class="card-header card-header-success" style="text-align: left;"><i
+                            class="fas fa-sign-in-alt"> 점포안내</i></div>
+                    <div class="card-body">
+                        <p> 점포안내</p>
+                        <p> 점포안내</p>
+                    </div>
                 </div>
-                <div class="card-body table-responsive">
-<!--                    게시판 올곳!!!-->
-                  <table class="table table-hover">
-                    <thead class="text-warning">
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Salary</th>
-                      <th>Country</th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
             </div>
-              <!--              2번째 열 2번째 카드 끝-->
-          </div>
+            <!--              2번째 카드 끝-->
+            <!--              3번째 카드-->
+            <div class="col-md-4">
+                <div class="card card-chart" style="background-color:rgba(147,218,54,0.6);">
+                    <div class="card-header card-header-success" style="text-align: left;"><i
+                            class="fas fa-sign-in-alt"> 인스타크롤링</i></div>
+                    <div class="card-body">
+                        <p> 인스타크롤링</p>
+                        <p> 인스타크롤링</p>
+                    </div>
+                </div>
+            </div>
+            <!--              3번째 카드 끝-->
+
         </div>
-      </div>
+        <div class="row">
+            <!--              2번째 열 1번째 카드 시작-->
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">지도 올곳:</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+            <!--              2번째열 1번째 카드 끝-->
+            <!--              2번째 열 2번째 카드 시작-->
+            <div class="col-lg-6 col-md-12">
+                <div class="card" style="background-color:rgba(134,12,232,0.6);">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="card-header card-header-success" style="text-align: left;"><i
+                                    class="fas fa-sign-in-alt"> 게시판</i></div>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <!--                    게시판 올곳!!!-->
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                            <th></th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일시</th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Dakota Rice</td>
+                                <td>$36,738</td>
+                                <td>Niger</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Dakota Rice</td>
+                                <td>$36,738</td>
+                                <td>Niger</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--              2번째 열 2번째 카드 끝-->
+        </div>
+    </div>
+</div>
 
 {% endblock %}
