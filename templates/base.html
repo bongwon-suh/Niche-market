@@ -357,14 +357,14 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
 
     <div class="nav-level">
         <div class="nav-header">
-            <h3><a href="{% url 'home' %}">틈새시장</a></h3>
+            <h3><a href="{% url 'home' %}"><i class="fas fa-home"> 틈새시장</i></a></h3>
         </div>
         <ul>
 
             <!--            if문 시작-->
             {% if user.is_active %}
             <li>
-                <a href="#" class="back-icon">{{user}}</a>
+                <a href="#" class="back-icon"><i class="fas fa-user-alt"> {{user}}</i></a>
                 <div class="submenu nav-level">
                     <div class="nav-header">
                         <h3>{{user}}</h3>
@@ -380,7 +380,7 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
             <!--            else문 -->
             {% else %}
             <li>
-                <a href="#" class="back-icon">Anonymous</a>
+                <a href="#" class="back-icon"><i class="fas fa-user-alt-slash"> Anonymous</i></a>
                 <div class="submenu nav-level">
                     <div class="nav-header">
                         <h3>Anonymous</h3>
@@ -397,7 +397,7 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
             <!--            endif-->
 
             <li>
-                <a href="#" class="back-icon">시장목록</a>
+                <a href="#" class="back-icon"><i class="fas fa-store"> 시장목록</i></a>
                 <div class="submenu nav-level">
                     <div class="nav-header">
                         <h3>지역선택</h3>
@@ -426,8 +426,10 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
                     <div class="back back-icon">Back</div>
                 </div>
             </li>
-            <li><a href="#" class="back-icon">게시판</a></li>
+            <li><a href="#" class="back-icon"><i class="fas fa-clipboard"> 게시판</i></a></li>
+<!--            권한 작업 후 시장추가와 점포추가는 계정 하위 메뉴로 들어갈 예정-->
             <li><a href="{% url 'market:market_add' %}" class="back-icon">시장추가</a></li>
+            <li><a href="{#% url 'market:store_add' %#}" class="back-icon">점포추가</a></li>
 
         </ul>
     </div>
