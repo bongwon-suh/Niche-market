@@ -3,32 +3,29 @@
 {% block title %}login.html{% endblock %}
 {% block content %}
 <style>
-label {
-    font-size: 1.2rem;
-    color : #9e9e9e;
+.content {
+text-align: center;
+height: 40%;
+width: 20%;
 }
-
 </style>
-
-{% if form.errors %}
-<div class="alert alert-danger">
-    <div class="font-weight-bold">
-        사용자 정보를 다시 한번 확인해 주세요.
-    </div>
-    {{ form.errors }}
-</div>
-{% endif %}
+<div class="content">
 <form action="." method="post">
     {% csrf_token %}
     <h1>Login</h1>
-
-    <div class="form-group">
-        {{ form.username| add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
-        {{ form.username|attr:"autofocus" }}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <div class="font-weight-bold" style="color:white; background-color:red;">
+            사용자 정보를 다시 한번 확인해 주세요.
+        </div>
     </div>
-    <div class="form-group">
-        {{ form.password| add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
-        {{ form.password}}
+    {% endif %}
+    <div class="form-group" style="color:white;">
+        {{ form.username|attr:"autofocus"|attr:"placeholder=아이디"|attr:"style=color:white;"}}
+    </div>
+
+    <div class="form-group" style="color:white; ">
+        {{ form.password|attr:"placeholder=비밀번호"}}
     </div>
     <div class="form-group">
         <div class="offset-sm-2 col-sm-5">
@@ -37,5 +34,5 @@ label {
         </div>
     </div>
 </form>
-
+</div>
 {% endblock %}
