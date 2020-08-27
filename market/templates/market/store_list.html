@@ -1,22 +1,50 @@
 {% extends "base.html" %}
 {% block title %}store_list.html{% endblock %}
 {% block content %}
-<h1>Store List</h1>
-<br>
-<ul>
-    {% for store in stores %}
-    <li><a href="/market/store/{{store.market_list.id}}/{{store.id}}">
-        {{ store }}</a></li>
-    {% endfor %}
-</ul>
+<style>
+.content {
+text-align: center;
+height: 50%;
+width: 50%;
+}
+.table{
+color:white;
+font-size:1.2em;
+}
+td{
+text-align:center;
+}
+#store:hover tbody tr:hover td {
+background: rgba(255,255,255,0.3);
+color: white;
+}
+
+</style>
 
 
-{% if user.is_active %}
+<div class="content">
+    <table id="store" class="table table-hover">
+        <thead class="text-warning">
+        <th>점포명</th>
+        <th>오픈시간</th>
+        <th>종료시간</th>
+        </thead>
+        <tbody>
+        {% for store in stores %}
+        <tr onclick="location.href='/market/store/{{store.market_list.id}}/{{store.id}}'" >
+            <td>{{store.store_name}}</td>
+            <td>{{store.open_hour}}</td>
+            <td>{{store.close_hour}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if user.is_active %}
 <div class="text-right mr-3">
     <a href="{% url 'market:store_add' market_fk%}" class="btn btn-primary btn-sm">
         <i class="fas fa-pencil-alt"></i> 쓰기</a>
 </div>
 {% endif %}
 
-
+</div>
 {% endblock %}
