@@ -40,10 +40,10 @@ class Market(models.Model):
 
 class Store(models.Model):
     store_name = models.CharField('STORE NAME', max_length=100)
-    store_introduction = models.TextField('STORE INTRODUCTION', null=True)
+    store_introduction = models.CharField('STORE INTRODUCTION', null=True, max_length=100)
     open_hour = models.TimeField('OPEN HOUR', blank=True, default='00:00:00')
     close_hour = models.TimeField('CLOSE HOUR', blank=True, default='23:59:59')
-    hour_information = models.TextField('HOUR INFORMATION', blank=True, null=True)
+    hour_information = models.CharField('HOUR INFORMATION', blank=True, null=True, max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='OWNER', blank=True, null=True)
     market_list = models.ForeignKey(Market, on_delete=models.CASCADE)
 
