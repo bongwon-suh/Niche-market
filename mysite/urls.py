@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from mysite.views import HomeView, UserCreateView, UserCreateDoneTV
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -27,4 +28,4 @@ urlpatterns = [
     # 회원 가입 및 처리
     path('accounts/register/', UserCreateView.as_view(), name='register'),
     path('accounts/register/done/', UserCreateDoneTV.as_view(),name='register_done'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
