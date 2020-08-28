@@ -11,6 +11,15 @@ from django.conf import settings
 from django.core.paginator import Paginator
 
 
+class MarketDetail(DetailView):
+    def get(self, request, *args, **kwargs):
+        queryset3 = get_object_or_404(Market, pk=kwargs['pk'])
+        ctx = {
+            'market': queryset3
+        }
+        return render(request, 'market/market_detail.html', ctx)
+
+
 class MarketDV(View):
 
     def get(self, request, *args, **kwargs):
@@ -45,7 +54,7 @@ class MarketCreateView(CreateView):
 
 class MarketUpdateView(UpdateView):
     model = Market
-    fields = ['market_name', 'introduction', 'location']
+    fields = ['market_name', 'location', 'addr', 'tel', 'url', 'ma', 'store_num']
 
     def get_success_url(self):
         return reverse('market:market', kwargs={'pk': self.object.pk})
