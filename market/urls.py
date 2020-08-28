@@ -1,6 +1,6 @@
 from django.urls import path
 from market.views import StoreDV, StoreLV, StoreCreateView, StoreUpdateView, StoreDeleteView, store_download
-from market.views import MarketDV, MarketCreateView, MarketUpdateView, MarketDeleteView, market_download
+from market.views import MarketDV, MarketCreateView, MarketUpdateView, MarketDeleteView, market_download,MarketDetail
 from mysite.views import HomeView
 from market.models import Market, Location
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
 
     path('<int:pk>/', MarketDV.as_view(), name='market'),
+    path('market_detail/<int:pk>/', MarketDetail.as_view(), name='market_detail'),
     path('market_add/', MarketCreateView.as_view(), name="market_add"),
     path('<int:pk>/market_update/', MarketUpdateView.as_view(), name="market_update"),
     path('<int:pk>/market_delete/', MarketDeleteView.as_view(), name="market_delete"),
