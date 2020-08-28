@@ -8,6 +8,7 @@ from mysite.views import OwnerOnlyMixin
 from django.http import FileResponse
 import os
 from django.conf import settings
+from django.core.paginator import Paginator
 
 
 class MarketDV(View):
@@ -59,10 +60,15 @@ class StoreLV(ListView):
     model = Store
 
     def get(self, request, *args, **kwargs):
-        queryset = Store.objects.filter(market_list_id=kwargs['pk'])
+        queryset = Store.objects.filter(market_list_id=kwargs['pk']).order_by('id')
+        page = int(request.GET.get('p', 1))
+        paginator = Paginator(queryset, 5)
+        boards = paginator.get_page(page)
+
         ctx = {
-            'stores': queryset,
-            'market_fk': kwargs['pk']
+            'boards': boards,
+            'market_fk': kwargs['pk'],
+
         }
         return render(request, 'market/store_list.html', ctx)
 
