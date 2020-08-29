@@ -9,6 +9,8 @@ from django.http import FileResponse
 import os
 from django.conf import settings
 from django.core.paginator import Paginator
+import json
+import urllib.request
 
 
 class MarketDetail(DetailView):
@@ -24,10 +26,29 @@ class MarketDV(View):
 
     def get(self, request, *args, **kwargs):
         queryset3 = get_object_or_404(Market, pk=kwargs['pk'])
-        ctx = {
-            'market_detail': queryset3
-        }
-        return render(request, 'market/market.html', ctx)
+        # 네이버 블로그 크롤링 추가
+        client_id = "un73j8VyJzJJfWpGfFWD"
+        client_secret = "FPdfimL0ui"
+
+        q = queryset3.market_name  # 시장이름으로만 블로그 내에 검색
+        encText = urllib.parse.quote(q)
+        url = "https://openapi.naver.com/v1/search/blog?query=" + encText + "&display=4"  # json 결과, 출력결과 4개
+        market_request = urllib.request.Request(url)
+        market_request.add_header("X-Naver-Client-Id", client_id)
+        market_request.add_header("X-Naver-Client-Secret", client_secret)
+        response = urllib.request.urlopen(market_request)
+        rescode = response.getcode()
+
+        if (rescode == 200):
+            response_body = response.read()
+            result = json.loads(response_body.decode('utf-8'))
+            items = result.get('items')
+
+            context = {
+                'items': items,  # 크롤링 검색 결과
+                'market_detail': queryset3
+            }
+            return render(request, 'market/market.html', context=context)
 
 
 class MarketCreateView(CreateView):
