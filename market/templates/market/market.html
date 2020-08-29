@@ -38,6 +38,10 @@
      box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     }
 
+
+
+
+
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -85,10 +89,10 @@
             <div class="col-md-4">
                 <div class="card card-chart" style="background-color:rgba(147,218,54,0.6);">
                     <div class="card-header card-header-success" style="text-align: left;"><i
-                            class="fas fa-sign-in-alt"> 인스타크롤링</i></div>
+                            class="fas fa-sign-in-alt"> 게시판</i></div>
                     <div class="card-body">
-                        <p> 인스타크롤링</p>
-                        <p> 인스타크롤링</p>
+                        <p> 게시판</p>
+                        <p> 게시판</p>
                     </div>
                 </div>
             </div>
@@ -114,34 +118,17 @@
             <!--              2번째 열 2번째 카드 시작-->
             <div class="col-lg-6 col-md-12">
                 <div class="card" style="background-color:rgba(134,12,232,0.6);">
-                    <div class="card-header card-header-tabs card-header-primary">
-                        <div class="nav-tabs-navigation">
-                            <div class="card-header card-header-success" style="text-align: left;"><i
-                                    class="fas fa-sign-in-alt"> 게시판</i></div>
-                        </div>
-                    </div>
-                    <div class="card-body table-responsive">
-                        <!--                    게시판 올곳!!!-->
-                        <table class="table table-hover">
-                            <thead class="text-warning">
-                            <th></th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>작성일시</th>
-                            </thead>
+                    <div class="card-header card-header-success" style="text-align: left;"><i
+                            class="fas fa-sign-in-alt"> 네이버 블로그</i></div>
+
+                    <div class="card-body table-responsive" style="padding-top:0;">
+                        <table class="table table-hover" style="margin-bottom:0;">
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Dakota Rice</td>
-                                <td>$36,738</td>
-                                <td>Niger</td>
+                            {% for item in items %}
+                            <tr style="color:white;" onclick="location.href='{{item.link}}'">
+                                <td style="padding:0.65rem;">{{ item.title|safe }}</td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Dakota Rice</td>
-                                <td>$36,738</td>
-                                <td>Niger</td>
-                            </tr>
+                            {% endfor %}
 
                             </tbody>
                         </table>
