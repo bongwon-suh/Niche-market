@@ -5,13 +5,6 @@ from django.contrib.auth.models import User
 
 
 class SingupForm(UserCreationForm):
-    email = forms.EmailField(required=True, widget=forms.EmailInput(
-        attrs={
-            'class': 'form-control',
-            'required': 'True',
-        }
-    ))
-
 
     class Meta:
         model = User
