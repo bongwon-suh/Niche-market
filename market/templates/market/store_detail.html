@@ -8,13 +8,14 @@
         text-align: center;
         height: 70%;
         width: 70%;
-        overflow-y: scroll;
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+                overflow-y: scroll;
+          -ms-overflow-style: none;  /* IE and Edge */
+           scrollbar-width: none;  /* Firefox */
     }
-        .content::-webkit-scrollbar {
+    .content::-webkit-scrollbar {
          display: none;
     }
+
 
     .container-wrap>.container .row {
         background: #ff0;
@@ -59,10 +60,21 @@
   width:100%;
 }
 
+textarea {
+width:100%;
+height: 2rem;
+background-color: #fff;
+color: black;
+}
+
+label{
+color:white;
+
+}
+
 
 
 </style>
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -92,11 +104,11 @@
                     </div>
                     <div class="card-inner">
                         <div class="header">
-                            <h2>{{object.market_list}} - {{object.store_name}}</h2>
+                            <h2>{{store.market_list}} - {{store.store_name}}</h2>
                         </div>
                         <div>
                             <div class="text-right">
-<!--                                권한 추가시 표시할 부분-->
+                                <!--                                권한 추가시 표시할 부분-->
                                 <a href="{% url 'market:store_update' store.id %}" class="mr-3">
                                     <i class="far fa-edit"></i> 수정</a>
                                 <a href="{% url 'market:store_delete' store.id %}" class="text-danger mr-3">
@@ -109,16 +121,83 @@
             <!--              1번째 카드 끝-->
             <!--              2번째 카드-->
             <div class="col-sm-6">
-                <div class="card" style="background-color:rgba(38,94,171,0);">
+                <div class="card" style="background-color:rgba(134,12,232,0.6);">
                     <div class="card-inner">
                         <div class="header text-left" style="color:white;">
-                            <h3>{{object.introduction}}</h3>
-                            <h3>OPEN : {{object.open_hour}}</h3>
-                            <h3>CLOSE : {{object.open_hour}}</h3>
-                            <h3>휴무일 : {{object.hour_information}}</h3>
+                            <h4>{{store.introduction}}</h4>
+                            <h4>OPEN : {{store.open_hour}}</h4>
+                            <h4>CLOSE : {{store.open_hour}}</h4>
+                            <h4>휴무일 : {{store.hour_information}}</h4>
                         </div>
+                        <h4 style="color:white;">사용자 이용후기</h4>
                         <div class="text-left" style="color:white;">
-                            <h1>댓글 기능 추가시 추가 할 곳</h1>
+                            <table class="table table-hover" style="margin-bottom:0;">
+                                <tbody>
+                                {% for comment in comments %}
+                                <tr style="color:white;">
+                                    <td style="padding:0.65rem;">{{ comment.comment }}</td>
+                                    <td style="padding:0.65rem;">{{ comment.score }}</td>
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                            <ul class="pagination justify-content-center">
+                                {% if comments.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?p={{comments.previous_page_number}}">이전</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link disabled" href="#">이전</a>
+                                </li>
+                                {% endif %}
+
+                                <li class="page-item active">
+                                    <a class="page-link">{{comments.number}}/{{comments.paginator.num_pages}}</a>
+                                </li>
+
+                                {% if comments.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?p={{comments.next_page_number}}">다음</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link disabled" href="#">다음</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+
+                            <form action="{% url 'market:store_comment' store.market_list_id store.id %}">
+
+                                <div>
+                                    <input type="radio" id="contactChoice1"
+                                           name="score" value="1">
+                                    <label for="contactChoice1">1</label>
+
+                                    <input type="radio" id="contactChoice2"
+                                           name="score" value="2">
+                                    <label for="contactChoice2">2</label>
+
+                                    <input type="radio" id="contactChoice3"
+                                           name="score" value="3">
+                                    <label for="contactChoice3">3</label>
+
+                                    <input type="radio" id="contactChoice4"
+                                           name="score" value="4">
+                                    <label for="contactChoice4">4</label>
+
+                                    <input type="radio" id="contactChoice5"
+                                           name="score" value="5">
+                                    <label for="contactChoice5">5</label>
+
+
+                                </div>
+                                <textarea name="comments" style="resize:none;"></textarea>
+
+                                <button type="submit" style="color:black;">댓글등록</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
