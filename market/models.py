@@ -91,3 +91,17 @@ class StoreAttachFile(models.Model):
 
     def __str__(self):
         return self.filename
+
+
+class StoreComment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    comment = models.TextField(verbose_name="댓글내용")
+    registered_date = models.DateTimeField(auto_now_add=True, verbose_name="등록 시간")
+    score = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.comment
+
+    class Meta:
+        db_table = "store_comment"
