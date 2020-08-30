@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from market.models import Market, Store, MarketAttachFile, StoreAttachFile
+from django.shortcuts import render, get_object_or_404, redirect
+from market.models import Market, Store, MarketAttachFile, StoreAttachFile, StoreComment
 from django.views.generic import TemplateView, DetailView, View
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -11,13 +11,14 @@ from django.conf import settings
 from django.core.paginator import Paginator
 import json
 import urllib.request
+from django.utils import timezone
 
 
 class MarketDetail(DetailView):
     def get(self, request, *args, **kwargs):
-        queryset3 = get_object_or_404(Market, pk=kwargs['pk'])
+        queryset = get_object_or_404(Market, pk=kwargs['pk'])
         ctx = {
-            'market': queryset3
+            'market': queryset
         }
         return render(request, 'market/market_detail.html', ctx)
 
@@ -104,8 +105,19 @@ class StoreLV(ListView):
 
 
 class StoreDV(DetailView):
-    model = Store
-    template_name = 'market/store_detail.html'
+    def get(self, request, *args, **kwargs):
+        queryset = StoreComment.objects.filter(store_id=kwargs['pk'])
+        queryset2 = Store.objects.get(pk=kwargs['pk'])
+
+        page = int(request.GET.get('p', 1))     # 댓글 페이징
+        paginator = Paginator(queryset, 5)
+        commments = paginator.get_page(page)
+
+        ctx={
+            'comments': commments,
+            'store': queryset2,
+        }
+        return render(request, 'market/store_detail.html', ctx)
 
 
 class StoreCreateView(LoginRequiredMixin, CreateView):
@@ -153,3 +165,16 @@ def store_download(request, id):
     file = StoreAttachFile.objects.get(id=id)
     file_path = os.path.join(settings.MEDIA_ROOT, str(file.upload_file))
     return FileResponse(open(file_path, 'rb'))
+
+
+# 댓글 등록 함수
+def store_comment(request, pk, fk):
+    store = Store.objects.get(pk=pk)
+    comments = StoreComment()
+    comments.author = request.user
+    comments.comment = request.GET['comments']
+    comments.registered_date = timezone.datetime.now()
+    comments.score = request.GET['score']
+    comments.store = store
+    comments.save()
+    return redirect('market:store_detail', fk, pk)
