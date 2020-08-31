@@ -19,6 +19,7 @@ class Market(models.Model):
 
     market_name = models.CharField(verbose_name="시장이름", max_length=100)
     address = models.CharField(null=True, max_length=100)
+    products = models.CharField(null=True, max_length=200)
     tel = models.CharField(null=True, max_length=100)
     sights_info = models.CharField(null=True, max_length=200)
     closed_date = models.CharField(null=True, max_length=200)
