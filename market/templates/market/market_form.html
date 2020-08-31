@@ -132,9 +132,6 @@ color:white;
         <span class="title">지도중심기준 행정동 주소정보</span>
         <span id="centerAddr"></span>
     </div>
-    <div id="clickLat"></div>
-    <div id="clickLng"></div>
-    <div id="addr"></div>
 
 </div>
 
@@ -188,16 +185,16 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             var lat = mouseEvent.latLng.getLat();
             var lng = mouseEvent.latLng.getLng();
 
-            var resultDiv1 = document.getElementById('clickLat');
-            resultDiv1.innerHTML = lat;
+            var resultDiv1 = document.getElementById('id_latitude'); // form id로 접근해서 값 변경
+            resultDiv1.value = lat;
 
-            var resultDiv2 = document.getElementById('clickLng');
-            resultDiv2.innerHTML = lng;
+            var resultDiv2 = document.getElementById('id_longitude'); // form id로 접근해서 값 변경
+            resultDiv2.value = lng;
 
             // 도로명, 지번 우선순위로 주소 저장 html 변환
 
-            var resultDiv3 = document.getElementById('addr');
-            resultDiv3.innerHTML = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+            var resultDiv3 = document.getElementById('id_address'); // form id로 접근해서 값 변경
+            resultDiv3.value = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
 
 
 
@@ -234,6 +231,7 @@ function displayCenterInfo(result, status) {
         }
     }
 }
+
 
 </script>
 
