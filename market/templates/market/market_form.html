@@ -33,6 +33,7 @@ display: block;
 color:white;
 }
 
+
 </style>
 
 <div class="content">
@@ -41,12 +42,12 @@ color:white;
         {% csrf_token %}
         <h1>시장추가 - {{user}}</h1>
         {% if form.errors %}
-            <div class="alert alert-danger">
-                <div class="font-weight-bold">
-                    {{ form.errors }}
-                </div>
+        <div class="alert alert-danger">
+            <div class="font-weight-bold">
+                {{ form.errors }}
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
         <div class="left">
 
             <div class="form-group">
@@ -54,7 +55,7 @@ color:white;
             </div>
 
             <div class="form-group">
-                {{ form.addr|attr:"placeholder=주소" }}
+                {{ form.address|attr:"placeholder=주소" }}
             </div>
 
             <div class="form-group">
@@ -62,20 +63,7 @@ color:white;
             </div>
 
             <div class="form-group">
-                {{ form.url|attr:"placeholder=홈페이지주소" }}
-            </div>
-        </div>
-        <div class="right">
-            <div class="form-group">
-                {{ form.ma|attr:"placeholder=시장규모" }}
-            </div>
-
-            <div class="form-group">
-                {{ form.store_num|attr:"placeholder=점포갯수" }}
-            </div>
-
-            <div class="form-group" style="color:black;">
-                {{ form.location|add_class:"form-control" }}
+                {{ form.hour_info|attr:"placeholder=영업시간" }}
             </div>
 
             <div class="form-group row">
@@ -83,6 +71,28 @@ color:white;
                 <div class="col-sm-8">
                     <input type="file" id="files" name="files">
                 </div>
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="form-group">
+                {{ form.closed_date|attr:"placeholder=휴무일" }}
+            </div>
+
+            <div class="form-group">
+                {{ form.products|attr:"placeholder=판매항목" }}
+            </div>
+
+            <div class="form-group">
+                {{ form.park_info|attr:"placeholder=주차정보" }}
+            </div>
+
+            <div class="form-group">
+                {{ form.sights_info|attr:"placeholder=관광정보" }}
+            </div>
+
+            <div class="form-group" style="color:black;">
+                {{ form.location|add_class:"form-control" }}
             </div>
 
 

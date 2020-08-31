@@ -52,17 +52,16 @@ class MarketDV(View):
             return render(request, 'market/market.html', context=context)
 
 
-class MarketCreateView(CreateView):
+class MarketCreateView(LoginRequiredMixin, CreateView):
     model = Market
     template_name = 'market/market_form.html'
-    # introduction 빠져서 임시적인 주석처리
-    # fields = ['market_name', 'introduction', 'location']
-    fields = ['market_name', 'location', 'addr', 'tel', 'url', 'ma', 'store_num']
+    fields = ['market_name', 'location', 'address', 'tel', 'hour_info', 'closed_date', 'park_info', 'sights_info', 'products']
 
     def get_success_url(self):
         return reverse('market:market', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
+
         form.instance.owner = self.request.user
         response = super().form_valid(form)
 
@@ -76,7 +75,7 @@ class MarketCreateView(CreateView):
 
 class MarketUpdateView(UpdateView):
     model = Market
-    fields = ['market_name', 'location', 'addr', 'tel', 'url', 'ma', 'store_num']
+    fields = ['market_name', 'location', 'address', 'tel', 'hour_info', 'closed_date', 'park_info', 'sights_info', 'products']
 
     def get_success_url(self):
         return reverse('market:market', kwargs={'pk': self.object.pk})
