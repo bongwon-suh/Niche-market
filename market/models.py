@@ -16,18 +16,18 @@ class Location(models.Model):
 
 
 class Market(models.Model):
-    # market_name = models.CharField(max_length=50, verbose_name="시장이름")
-    # introduction = models.CharField(max_length=50, verbose_name="시장소개")
-    # location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     market_name = models.CharField(verbose_name="시장이름", max_length=100)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    addr = models.CharField(null=True, max_length=100)
+    address = models.CharField(null=True, max_length=100)
     tel = models.CharField(null=True, max_length=100)
-    url = models.CharField(null=True, max_length=100)
-    ma = models.IntegerField(null=True)
-    store_num = models.IntegerField(null=True)
-    h_type = models.TextField(null=True)
+    sights_info = models.CharField(null=True, max_length=200)
+    closed_date = models.CharField(null=True, max_length=200)
+    hour_info = models.CharField(null=True, max_length=100)
+    park_info = models.CharField(null=True, max_length=200)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='OWNER', blank=True, null=True)
 
     def __str__(self):
         return self.market_name
