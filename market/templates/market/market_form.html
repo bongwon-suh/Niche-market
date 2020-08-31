@@ -1,25 +1,26 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-{% block title %}store_form.html{% endblock %}
+{% block title %}market_form.html{% endblock %}
 {% block content %}
 <style>
-        .content {
+.content {
         text-align: center;
         height: 55%;
         width: 50%;
     }
-    ::placeholder {
-color:white;
-font-size:1.1em;
+
+::placeholder {
+    color:white;
+    font-size:1.1em;
 }
 
-    div.left {
+div.left {
     width: 50%;
     float: left;
     padding: 1em;
-
     }
-    div.right{
+
+div.right{
     width: 50%;
     float: right;
     padding: 1em;
@@ -29,24 +30,34 @@ font-size:1.1em;
 select {
 display: block;
 }
+
 .form-group{
 color:white;
 }
 
+
+
+.map_wrap {position:relative;width:100%;height:350px;}
+.title {font-weight:bold;display:block;}
+.hAddr {position:absolute;left:10px;top:30px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+#centerAddr {display:block;margin-top:2px;font-weight: normal;}
+.bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 </style>
 
-<div class="content">
+<!--<div class="content">-->
+<div class="content" style="overflow:scroll; width:1300px; height:900px;">
 
     <form action="." method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>시장추가 - {{user}}</h1>
+
         {% if form.errors %}
-            <div class="alert alert-danger">
-                <div class="font-weight-bold">
-                    {{ form.errors }}
-                </div>
+        <div class="alert alert-danger">
+            <div class="font-weight-bold">
+                {{ form.errors }}
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
         <div class="left">
 
             <div class="form-group">
@@ -54,7 +65,7 @@ color:white;
             </div>
 
             <div class="form-group">
-                {{ form.addr|attr:"placeholder=주소" }}
+                {{ form.address|attr:"placeholder=주소" }}
             </div>
 
             <div class="form-group">
@@ -62,36 +73,169 @@ color:white;
             </div>
 
             <div class="form-group">
-                {{ form.url|attr:"placeholder=홈페이지주소" }}
+                {{ form.hour_info|attr:"placeholder=영업시간" }}
             </div>
+
+<!--            <div class="form-group row">-->
+<!--                <label for="files" class="col-form-label col-sm-2 ml-3 font-weight-bold"></label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input type="file" id="files" name="files">-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                {{ form.latitude|attr:"placeholder=위도"}}
+            </div>
+
+
         </div>
         <div class="right">
             <div class="form-group">
-                {{ form.ma|attr:"placeholder=시장규모" }}
+                {{ form.closed_date|attr:"placeholder=휴무일" }}
             </div>
 
             <div class="form-group">
-                {{ form.store_num|attr:"placeholder=점포갯수" }}
+                {{ form.products|attr:"placeholder=판매항목" }}
             </div>
-
-            <div class="form-group" style="color:black;">
-                {{ form.location|add_class:"form-control" }}
-            </div>
-
-            <div class="form-group row">
-                <label for="files" class="col-form-label col-sm-2 ml-3 font-weight-bold"></label>
-                <div class="col-sm-8">
-                    <input type="file" id="files" name="files">
-                </div>
-            </div>
-
 
             <div class="form-group">
-                <div class="offset-sm-2 col-sm-5">
-                    <input type="submit" value="Submit" class="btn btn-info"/>
-                </div>
+                {{ form.park_info|attr:"placeholder=주차정보" }}
+            </div>
+
+            <div class="form-group">
+                {{ form.sights_info|attr:"placeholder=관광정보"}}
+            </div>
+
+            <div class="form-group">
+                {{ form.longitude|attr:"placeholder=경도" }}
+            </div>
+
+
+        </div>
+
+<!--        <div id="map" style="width:100%;height:350px;"></div>-->
+        <div class="form-group" style="color:black;">
+            {{ form.location|add_class:"form-control" }}
+        </div>
+
+
+        <div class="form-group">
+            <div class="offset-sm-2 col-sm-5">
+                <input type="submit" value="Submit" class="btn btn-info"/>
             </div>
         </div>
+
     </form>
+
+    <div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div class="hAddr">
+        <span class="title">지도중심기준 행정동 주소정보</span>
+        <span id="centerAddr"></span>
+    </div>
+    <div id="clickLat"></div>
+    <div id="clickLng"></div>
+    <div id="addr"></div>
+
 </div>
+
+
+</div>
+
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=672f1dc7e3016f169ace1e986e9d359c&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 1 // 지도의 확대 레벨
+    };
+
+// 지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+
+            var content = '<div class="bAddr">' +
+                            '<span class="title">법정동 주소정보</span>' +
+                            detailAddr +
+                        '</div>';
+
+            // 마커를 클릭한 위치에 표시합니다
+            marker.setPosition(mouseEvent.latLng);
+            marker.setMap(map);
+
+            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+
+            // 이 아래는 위도 경도 얻는 곳입니다.
+
+            var lat = mouseEvent.latLng.getLat();
+            var lng = mouseEvent.latLng.getLng();
+
+            var resultDiv1 = document.getElementById('clickLat');
+            resultDiv1.innerHTML = lat;
+
+            var resultDiv2 = document.getElementById('clickLng');
+            resultDiv2.innerHTML = lng;
+
+            // 도로명, 지번 우선순위로 주소 저장 html 변환
+
+            var resultDiv3 = document.getElementById('addr');
+            resultDiv3.innerHTML = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+
+
+
+        }
+    });
+});
+
+// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'idle', function() {
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+});
+
+function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+}
+
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+function displayCenterInfo(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        var infoDiv = document.getElementById('centerAddr');
+
+        for(var i = 0; i < result.length; i++) {
+            // 행정동의 region_type 값은 'H' 이므로
+            if (result[i].region_type === 'H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+            }
+        }
+    }
+}
+
+</script>
+
+
 {% endblock %}
