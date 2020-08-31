@@ -24,6 +24,7 @@ class Market(models.Model):
     closed_date = models.CharField(null=True, max_length=200)
     hour_info = models.CharField(null=True, max_length=100)
     park_info = models.CharField(null=True, max_length=200)
+    products = models.CharField(null=True, max_length=200)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
