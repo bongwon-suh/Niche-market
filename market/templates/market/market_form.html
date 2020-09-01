@@ -5,7 +5,7 @@
 <style>
 .content {
         text-align: center;
-        height: 90%;
+        height: 95%;
         width: 90%;
         overflow-y: scroll;
           -ms-overflow-style: none;  /* IE and Edge */
@@ -33,7 +33,7 @@ color:white;
 #menu_wrap::-webkit-scrollbar{ display:none; }
 
 
-.map_wrap {position:relative;width:100%;height:350px;}
+.map_wrap {position:relative;width:100%;height:450px;}
 .title {font-weight:bold;display:block;}
 .hAddr {position:absolute;left:10px;top:30px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
 #centerAddr {display:block;margin-top:2px;font-weight: normal;}
@@ -116,27 +116,13 @@ color:white;
                     </div>
 
                     <div class="form-group">
-                        <div class="offset-sm-2 col-sm-5">
-                            <input type="submit" value="Submit" class="btn btn-info"/>
-                        </div>
+                        {{ form.products|attr:"placeholder=판매항목" }}
                     </div>
-
-        <!--            <div class="form-group row">-->
-        <!--                <label for="files" class="col-form-label col-sm-2 ml-3 font-weight-bold"></label>-->
-        <!--                <div class="col-sm-8">-->
-        <!--                    <input type="file" id="files" name="files">-->
-        <!--                </div>-->
-        <!--            </div>-->
 
                 </div>
 <!--                왼쪽 1번째-->
 
                 <div class="col-sm-2">
-
-
-                    <div class="form-group">
-                        {{ form.products|attr:"placeholder=판매항목" }}
-                    </div>
 
                     <div class="form-group">
                         {{ form.park_info|attr:"placeholder=주차정보" }}
@@ -157,6 +143,20 @@ color:white;
                     <div class="form-group" style="color:black;">
                         {{ form.location|add_class:"form-control" }}
                     </div>
+
+                    <div class="form-group">
+                        <label for="files" class="font-weight-bold"></label>
+                        <div>
+                            <input type="file" id="files" name="files">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <input type="submit" value="Submit" class="btn btn-info"/>
+                        </div>
+                    </div>
+
                 </div>
 <!--왼쪽 2번째-->
 <!--            왼쪽끝-->
