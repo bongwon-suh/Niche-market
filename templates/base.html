@@ -384,6 +384,7 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
                         <li>
                             <a href="{% url 'logout' %}">로그아웃</a>
                             <a href="{% url 'password_change' %}">사용자정보변경</a>
+                            <a href="{% url 'market:market_add' %}" class="back-icon">시장추가</a>
                         </li>
                     </ul>
                 </div>
@@ -437,9 +438,8 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
                     <div class="back back-icon">Back</div>
                 </div>
             </li>
-            <li><a href="#" class="back-icon"><i class="fas fa-clipboard"> 게시판</i></a></li>
+            <li><a href="#" class="back-icon"><i class="fas fa-clipboard"> 공지사항</i></a></li>
 <!--            권한 작업 후 시장추가와 점포추가는 계정 하위 메뉴로 들어갈 예정-->
-            <li><a href="{% url 'market:market_add' %}" class="back-icon">시장추가</a></li>
 
         </ul>
     </div>
