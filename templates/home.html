@@ -120,7 +120,7 @@ var positions = [
 '   <h7>{{m.market_name}}</h5>',
 '   <p>{{m.address|linebreaks}}',
 '       <a href="{% url 'market:market' m.id %}"><img src="http://placehold.it/55x55" width="55" height="55" alt="서울시청" class="thumb" /></a><br />',
-'       {{m.closed_date}}<br />',
+'       {{m.closed_date|linebreaks}}<br />',
 '   </p>',
 '</div>'
 ].join(''),
