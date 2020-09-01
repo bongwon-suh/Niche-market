@@ -3,6 +3,7 @@ from market.views import StoreDV, StoreLV, StoreCreateView, StoreUpdateView, Sto
 from market.views import MarketDV, MarketCreateView, MarketUpdateView, MarketDeleteView, market_download,MarketDetail
 from mysite.views import HomeView
 from market.models import Market, Location
+from board.views import *
 
 app_name = 'market'
 urlpatterns = [
@@ -22,5 +23,16 @@ urlpatterns = [
     path('<int:pk>/store_delete/', StoreDeleteView.as_view(), name="store_delete"),
     path('store_download/<int:id>', store_download, name="store_download"),
     path('comment/<int:fk>/<int:pk>', store_comment, name='store_comment'),
+
+    # path('', BoardView.as_view(), name='board'),
+    # path('<int:pk>', BoardViewDV.as_view(), name='details'),
+    # # Example: /board/add
+    # path('add/', BoardCreateView.as_view(), name="add"),
+    # # Example: /bookmark/change/
+    # # path('change/', BoardChange.as_view(), name="change"),
+    # # # Example: /bookmark/99/update/
+    # path('<int:pk>/update/', BoardUpdateView.as_view(), name="update"),
+    # # Example: /bookmark/99/delete/
+    # path('<int:pk>/delete/', BoardDeleteView.as_view(), name="delete"),
 
 ]

@@ -12,6 +12,8 @@ from django.core.paginator import Paginator
 import json
 import urllib.request
 from django.utils import timezone
+from board.urls import *
+
 
 
 class MarketDetail(DetailView):
@@ -177,3 +179,46 @@ def store_comment(request, pk, fk):
     comments.store = store
     comments.save()
     return redirect('market:store_detail', fk, pk)
+
+
+# TemplateView
+class BoardView(ListView):
+    template_name = 'board_list.html'
+    model = Board
+    context_object_name = "boards"
+    paginate_by = 10
+
+
+class BoardViewDV(DetailView):
+    template_name = 'board_detail.html'
+    model = Board
+    context_object_name = 'details'
+
+
+class BoardCreateView(CreateView):
+    model = Board
+    template_name = 'board_form.html'
+    fields = ['title', 'content', 'owner', 'market']
+    initial = {'slug': 'auto-filling-do-not-input'}
+    success_url = reverse_lazy('board:board')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class BoardUpdateView(UpdateView):
+    model = Board
+    template_name = 'board_form.html'
+    fields = ['title', 'content', 'owner', 'market']  # 폼 모델에 사용할 필드  폼 모델 자동 생성
+    initial = {'slug': 'auto-filling-do-not-input'}
+    success_url = reverse_lazy('board:board')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+
+class BoardDeleteView(DeleteView):
+    model = Board
+    success_url = reverse_lazy('board:board')
+    template_name = 'board_confirm_delete.html'

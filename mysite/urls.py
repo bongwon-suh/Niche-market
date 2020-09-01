@@ -27,5 +27,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     # 회원 가입 및 처리
     path('accounts/register/', UserCreateView.as_view(), name='register'),
-    path('accounts/register/done/', UserCreateDoneTV.as_view(),name='register_done'),
+    path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
+    # 게시판
+    path('board/', include('board.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

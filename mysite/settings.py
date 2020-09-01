@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'market.apps.MarketConfig',
     'widget_tweaks',
+    'board.apps.BoardConfig',
 ]
 
 MIDDLEWARE = [
