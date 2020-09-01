@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}bookmark_detail.html{% endblock %}
+{% block content %}
+<h1>제목 : {{details.title}}</h1>
+
+ <h3>작성자 :{{object.owner}}</h3>
+ <p>
+     {{object.content}}
+ </p>
+
+<a href="{% url 'board:board' %}"><button>목록보기</button></a>
+<a href="{% url 'board:update' details.id %}"><button>수정</button></a>
+<a href="{% url 'board:delete' details.id %}"><button>삭제</button></a>
+
+{% endblock %}

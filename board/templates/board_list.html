@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}board_list.html{% endblock %}
+{% block content %}
+<h1>게 시 판</h1>
+<br>
+<table>
+    <thead>
+    <tr>
+        <td>시장번호</td>
+        <td>제목</td>
+        <td>내용</td>
+        <td>작성자</td>
+        <td>등록시간</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {% for board in object_list %}
+        <td><a href="{% url 'board:details' board.id%}">{{board.market}}</a></td>
+        <td><a href="{% url 'board:details' board.id%}">{{board.title}}</a></td>
+        <td><a href="{% url 'board:details' board.id%}">{{board.content}}</a></td>
+        <td><a href="{% url 'board:details' board.id%}">{{board.owner}}</a></td>
+        <td><a href="{% url 'board:details' board.id%}">{{board.registered_data}}</a></td>
+    </tr>
+    </tbody>
+</table>
+{% endfor %}
+<a href="{% url 'board:add' %}"><button>글쓰기</button></a>
+
+{% endblock %}

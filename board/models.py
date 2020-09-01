@@ -12,9 +12,9 @@ from taggit.managers import TaggableManager
 class Board(models.Model):
     title = models.CharField(verbose_name='TITLE', max_length=50,)
     content = models.TextField('CONTENT')
+    registered_date = models.DateTimeField('CREATE DATE', auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='OWNER', blank=True, null=True)
     market = models.ForeignKey(Market, on_delete=models.CASCADE)
-    registered_date = models.DateTimeField('CREATE DATE', auto_now_add=True)
     modify_dt = models.DateTimeField('MODIFY DATE', auto_now=True)
 
     class Meta:
