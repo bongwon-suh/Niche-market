@@ -1,30 +1,55 @@
 {% extends "base.html" %}
 {% block title %}board_list.html{% endblock %}
 {% block content %}
+<style>
+.content {
+text-align: center;
+height: 50%;
+width: 50%;
+}
+.table{
+color:white;
+font-size:1.2em;
+}
+td{
+text-align:center;
+}
+#board:hover tbody tr:hover td {
+background: rgba(255,255,255,0.3);
+color: white;
+}
+
+</style>
+<div class="content">
 <h1>게 시 판</h1>
 <br>
-<table>
-    <thead>
-    <tr>
-        <td>시장번호</td>
-        <td>제목</td>
-        <td>내용</td>
-        <td>작성자</td>
-        <td>등록시간</td>
-    </tr>
+<table id="board" class="table table-hover">
+    <thead class=text-warning">
+    <th>시장번호</th>
+    <th>제목</th>
+    <th>내용</th>
+    <th>작성자</th>
+    <th>등록시간</th>
     </thead>
     <tbody>
     <tr>
         {% for board in object_list %}
-        <td><a href="{% url 'board:details' board.id%}">{{board.market}}</a></td>
-        <td><a href="{% url 'board:details' board.id%}">{{board.title}}</a></td>
-        <td><a href="{% url 'board:details' board.id%}">{{board.content}}</a></td>
-        <td><a href="{% url 'board:details' board.id%}">{{board.owner}}</a></td>
-        <td><a href="{% url 'board:details' board.id%}">{{board.registered_data}}</a></td>
+        <tr onclick="location.href='{% url 'board:details' board.id%}'">
+        <td>{{board.market}}</td>
+        <td>{{board.title}}</td>
+        <td>{{board.content}}</td>
+        <td>{{board.owner}}</td>
+        <td>{{board.registered_data}}</td>
     </tr>
+    {% endfor %}
     </tbody>
 </table>
-{% endfor %}
-<a href="{% url 'board:add' %}"><button>글쓰기</button></a>
+{% if user.is_active %}
+    <div class="text-right mr-3">
+        <a href="{% url 'board:add' %}" class="btn btn-primary btn-sm">
+            <i class="fas fa-pencil-alt"></i> 쓰기</a>
+    </div>
+    {% endif %}
+</div>
 
 {% endblock %}
