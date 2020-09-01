@@ -9,9 +9,19 @@ from .forms import SingupForm
 from django.views.defaults import permission_denied
 from django.shortcuts import render
 
+import requests
+from bs4 import BeautifulSoup
 
 class HomeView(TemplateView):
     template_name = 'home.html'
+    def get(self, request, *args, **kwargs):
+        res = requests.get('https://news.seoul.go.kr/economy/archives/category/nationaleconomy-news_c1/tradition_make_c1/traditioninfo_biz_nationaleconomy-n1')
+        soup = BeautifulSoup(res.content, 'html.parser')
+        title_data = soup.select('div.post-lst h3.tit')
+        ctx = {
+            'seoul': title_data
+        }
+        return render(request, 'home.html', ctx)
 
 
 class UserCreateView(CreateView):
@@ -33,4 +43,6 @@ class OwnerOnlyMixin(AccessMixin):
         if self.request.user != self.object.owner:
             self.handle_no_permission()
         return super().get(request, *args, **kwargs)
+
+
 
