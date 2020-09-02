@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}board_list.html{% endblock %}
+{% block content %}
+<style>
+.content {
+text-align: center;
+height: 50%;
+width: 50%;
+}
+.table{
+color:white;
+font-size:1.2em;
+}
+td{
+text-align:center;
+}
+#board:hover tbody tr:hover td {
+background: rgba(255,255,255,0.3);
+color: white;
+}
+
+</style>
+<div class="content">
+<h1>게 시 판</h1>
+<br>
+<table id="board" class="table table-hover">
+    <thead class=text-warning">
+    <th>시장번호</th>
+    <th>제목</th>
+    <th>내용</th>
+    <th>작성자</th>
+    <th>등록시간</th>
+    </thead>
+    <tbody>
+    <tr>
+        {% for board in boards %}
+        <tr onclick="location.href='{% url 'board:board_detail' board.id %}' ">
+        <td>{{board.market}}</td>
+        <td>{{board.title}}</td>
+        <td>{{board.content}}</td>
+        <td>{{board.owner}}</td>
+        <td>{{board.registered_data}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if user.is_active %}
+    <div class="text-right mr-3">
+        <a href="{% url 'board:board_add' market_fk%}" class="btn btn-primary btn-sm">
+            <i class="fas fa-pencil-alt"></i> 쓰기</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
