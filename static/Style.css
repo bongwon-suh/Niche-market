@@ -1,4 +1,12 @@
 
+.hn{font-family: 'Hanna', sans-serif;}
+
+.market_list {
+  font-family: 'Hanna', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 20px 0;
+}
 
 .band {
   width: 90%;
@@ -20,7 +28,7 @@
   .item-1 {
   grid-column: 1/ span 2;
   }
-  .item-1 h1 {
+  .item-1 h2 {
     font-size: 30px;
   }
 }
@@ -33,7 +41,7 @@
 
 /* card */
 
-.card {
+.card1 {
   min-height: 100%;
   background: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -46,12 +54,12 @@
   transition: all .1s ease-in;
 }
 
-.card:hover {
+.card1:hover {
   top: -2px;
   box-shadow: 0 4px 5px rgba(0,0,0,0.2);
 }
 
-.card article {
+.card1 article {
   padding: 4px;
   display: flex;
   flex: 1;
@@ -59,15 +67,16 @@
   flex-direction: column;
   
 }
-.card .thumb {
+.card1 .thumb {
   padding-bottom: 60%;
   background-size: cover;
   background-position: center center;
 }
 
-.card p { 
+.card1 p {
   flex: 1; /* make p grow to fill available space*/
   line-height: 1.4;
+  color: black;
 }
 
 /* typography */
@@ -77,7 +86,7 @@ h2 {
   color: black;
 }
 
-.card span {
+.card1 span {
   font-size: 12px;
   font-weight: bold;
   color: black;

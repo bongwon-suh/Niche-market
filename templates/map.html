@@ -11,7 +11,19 @@
 .content::-webkit-scrollbar {
          display: none;
     }
-.map_wrap {position:relative;width:100%;height:300px;}
+.content2 {
+        text-align: left;
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+          -ms-overflow-style: none;  /* IE and Edge */
+           scrollbar-width: none;  /* Firefox */
+    }
+.content2::-webkit-scrollbar {
+         display: none;
+    }
+
+.map_wrap {position:relative;width:100%;height:350px;}
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 
@@ -114,14 +126,13 @@ var positions = [
     {% for m in market_list %}
     {
         content: [
-'<div class="customoverlay">',
+'<div class="content2" style="white-space:nowrap;">',
 '   <a href="{% url 'market:market' m.id %}">',
 '      <span class="title">{{m.market_name}}</span>',
-'       <p>{{m.address|linebreaks}}</p>',
-'       <br />',
-'       {{m.closed_date|linebreaks}}',
-'       <br>   ',
+'      <p>{{m.address|linebreaks}}</p>',
+'      <p>{{m.closed_date|linebreaks}}</p>',
 '   </a>',
+'<b><a href="https://map.kakao.com/link/map/{{m.market_name}},{{m.latitude}},{{m.longitude}}" style="color:blue" target="_blank">큰지도보기</a> | <a href="https://map.kakao.com/link/to/{{m.market_name}},{{m.latitude}},{{m.longitude}}" style="color:blue" target="_blank">길찾기</a></b>',
 '</div>'
 ].join(''),
         latlng: new kakao.maps.LatLng({{m.latitude}}, {{m.longitude}})
