@@ -23,6 +23,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('market/', include('market.urls')),
+    path('board/', include('board.urls')),
     # 로그인, 로그아웃, 비밀번호 변경 등 담당
     path('accounts/', include('django.contrib.auth.urls')),
     # 회원 가입 및 처리
