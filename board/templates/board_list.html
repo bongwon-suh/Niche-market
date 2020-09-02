@@ -33,8 +33,8 @@ color: white;
     </thead>
     <tbody>
     <tr>
-        {% for board in object_list %}
-        <tr onclick="location.href='{% url 'board:details' board.id%}'">
+        {% for board in boards %}
+        <tr onclick="location.href='/market/board/{{board.market_list.id}}/{{board.id}}'">
         <td>{{board.market}}</td>
         <td>{{board.title}}</td>
         <td>{{board.content}}</td>
@@ -46,7 +46,7 @@ color: white;
 </table>
 {% if user.is_active %}
     <div class="text-right mr-3">
-        <a href="{% url 'board:add' %}" class="btn btn-primary btn-sm">
+        <a href="{% url 'board:board_add' market_fk%}" class="btn btn-primary btn-sm">
             <i class="fas fa-pencil-alt"></i> 쓰기</a>
     </div>
     {% endif %}

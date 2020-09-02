@@ -39,13 +39,6 @@
     }
 
 
-
-
-
-
-
-
-
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -88,11 +81,11 @@
             </div>
             <!--              2번째 카드 끝-->
             <!--              3번째 카드-->
-            <div class="col-md-4">
+            <div class="col-md-4" onclick="location.href='{% url 'board:board' market_detail.id%}' ">
                 <div class="card card-chart" style="background-color:rgba(147,218,54,0.6);">
                     <div class="card-body">
                         <br><br>
-                        <i class="fas fa-sign-in-alt" style="font-size:2.3em;"><i onclick="location.href='/market/board/{{x.market_name}}' ">&nbsp;게시판</i></i>
+                        <i class="fas fa-sign-in-alt" style="font-size:2.3em;">게시판</i>
                         <br><br>
                     </div>
                 </div>
