@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import AccessMixin
 from .forms import SingupForm
 
 from django.views.defaults import permission_denied
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 import requests
 from bs4 import BeautifulSoup
@@ -18,6 +18,9 @@ class HomeView(TemplateView):
     def get(self, request, *args, **kwargs):
         res = requests.get('https://news.seoul.go.kr/economy/archives/category/nationaleconomy-news_c1/tradition_make_c1/traditioninfo_biz_nationaleconomy-n1')
         soup = BeautifulSoup(res.content, 'html.parser')
+
+        # queryset = get_object_or_404(Market, pk=kwargs['pk']) # 마켓에서 사진 가져옴
+
 
         title_list = []
         link_list = []
@@ -31,7 +34,7 @@ class HomeView(TemplateView):
 
             title = title[0].get('title')
             link = link[0].get('href')
-            made_time = made_time[0].get_text()[0:19]
+            made_time = made_time[0].get_text()[0:11]
 
             html_content = [title, link, made_time]
 
@@ -47,6 +50,7 @@ class HomeView(TemplateView):
         #         }
         post = {
                 'html_content': html_content_list
+                # 'market': queryset
                 }
 
 

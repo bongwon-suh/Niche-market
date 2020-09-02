@@ -1,0 +1,38 @@
+<div class="support-grid"></div>
+
+  <div class="band">
+      {% for m in market_list %}
+      {% if forloop.counter < 12 %}
+        <div class="item-{{forloop.counter}}">
+              <a href="{% url 'market:market' m.id %}" class="card">
+                <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-1.jpg);"></div>
+                <article>
+                  <h2>{{m.market_name}}</h2>
+                  <span>{{m.address|linebreaks}}</span>
+                  <span>{{m.products|linebreaks}}</span>
+                </article>
+              </a>
+        </div>
+      {% endif %}
+      {% endfor %}
+  </div>
+
+
+<script type="text/javascript">
+function lottoNum (array) {
+    if (! array) {
+        var array = [];
+    }
+    let n = Math.floor(Math.random() * {{market_list.length}}) + 1;
+
+    if (array.length < 11 && array.indexOf(n) < 0) {
+        array.push(n);
+        return lottoNum(array);
+    } else {
+        return array;
+    }
+}
+var number = lottoNum();
+var number1 = number[0];
+
+</script>
