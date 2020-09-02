@@ -1,11 +1,17 @@
 <div class="support-grid"></div>
 
   <div class="band">
-      {% for m in market_list %}
+      {% for m in market_list reversed %}
       {% if forloop.counter < 12 %}
         <div class="item-{{forloop.counter}}">
               <a href="{% url 'market:market' m.id %}" class="card">
+                <!--첨부파일이 없으면 기본 이미지 있으면 대표사진-->
+                {% if m.files.get.id %}
+                <div class="thumb" style="background-image: url(/market/market_download/{{ m.files.get.id }});"></div>
+                {% else %}
                 <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-1.jpg);"></div>
+                {% endif %}
+                <!--첨부파일이 없으면 기본 이미지 있으면 대표사진 여기까지-->
                 <article>
                   <h2>{{m.market_name}}</h2>
                   <span>{{m.address|linebreaks}}</span>
@@ -15,6 +21,7 @@
         </div>
       {% endif %}
       {% endfor %}
+      <span id="myText"></span>
   </div>
 
 
@@ -23,7 +30,7 @@ function lottoNum (array) {
     if (! array) {
         var array = [];
     }
-    let n = Math.floor(Math.random() * {{market_list.length}}) + 1;
+    let n = Math.floor(Math.random() * 70) + 1;
 
     if (array.length < 11 && array.indexOf(n) < 0) {
         array.push(n);
@@ -34,5 +41,6 @@ function lottoNum (array) {
 }
 var number = lottoNum();
 var number1 = number[0];
+document.getElementById("myText").innerHTML = number1;
 
 </script>

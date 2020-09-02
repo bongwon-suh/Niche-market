@@ -12,6 +12,7 @@ from django.shortcuts import render, get_object_or_404
 import requests
 from bs4 import BeautifulSoup
 
+
 class HomeView(TemplateView):
     template_name = 'home.html'
 
