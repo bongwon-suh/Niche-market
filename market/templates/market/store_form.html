@@ -12,6 +12,12 @@ width: 50%;
 color:#000;
 font-size:1.1em;
 }
+
+.form-group{
+font-weight: bold;
+font-size:1.1em;
+}
+
 div.left {
 width: 50%;
 float: left;
@@ -25,9 +31,6 @@ padding: 1em;
 select {
 display: block;
 }
-.form-group{
-}
-
 
 
 </style>
@@ -37,7 +40,7 @@ display: block;
 
     <form action="." method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <h1>점포추가 - {{user}}</h1>
+        <h1 style="font-weight:bold;">점포추가 - {{user}}</h1>
 
         {% if form.errors %}
         <div class="alert alert-danger">
@@ -85,13 +88,11 @@ display: block;
             </div>
 
             <div class="form-group row">
-                <label for="files" class="col-form-label col-sm-2 ml-3 font-weight-bold" style="color:white; font-size:1.1em;">
-                    점포사진 추가</label>
+                <label for="files" class="col-form-label col-sm-2 ml-3 font-weight-bold"> </label>
                 <div class="col-sm-8 ">
                     <input type="file" id="files" name="files">
                 </div>
             </div>
-
 
             <div class="form-group">
                 <div class="offset-sm-2 col-sm-5">
