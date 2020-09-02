@@ -52,7 +52,7 @@ class MarketDV(View):
             return render(request, 'market/market.html', context=context)
 
 
-class MarketCreateView(CreateView):
+class MarketCreateView(LoginRequiredMixin, CreateView):
     model = Market
     template_name = 'market/market_form.html'
     # introduction 빠져서 임시적인 주석처리
@@ -63,6 +63,7 @@ class MarketCreateView(CreateView):
         return reverse('market:market', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
+
         form.instance.owner = self.request.user
         response = super().form_valid(form)
 
