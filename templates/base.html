@@ -321,7 +321,6 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
 }
 
 .hero-view {
-  background: url(http://bupyeong-market.com/upload/main/20170227103531072.jpg);
   height: 100vh;
   position: relative;
   z-index: 1;
@@ -332,10 +331,12 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
   background-size: cover;
   background-position: 0px 50%;
   transform: translateY(-60px);
+
 }
+
+
 .hero-view h1{
   text-align: center;
-  color: #fff;
   font-weight: 300;
   font-size: 3rem;
 }
@@ -465,7 +466,7 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
     </section>
 
     <section>
-        <div class="hero-view">
+        <div class="hero-view" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.9) 100%), url(http://bupyeong-market.com/upload/main/20170227103531072.jpg)">
             {% block content %} {% endblock %}
         </div>
     </section>
