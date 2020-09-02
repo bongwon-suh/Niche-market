@@ -75,7 +75,7 @@ class MarketCreateView(LoginRequiredMixin, CreateView):
         return response
 
 
-class MarketUpdateView(UpdateView):
+class MarketUpdateView(OwnerOnlyMixin, UpdateView):
     model = Market
     fields = '__all__'
 
@@ -83,7 +83,7 @@ class MarketUpdateView(UpdateView):
         return reverse('market:market', kwargs={'pk': self.object.pk})
 
 
-class MarketDeleteView(DeleteView):
+class MarketDeleteView(OwnerOnlyMixin, DeleteView):
     model = Market
     success_url = reverse_lazy('market:home')
 
@@ -111,7 +111,7 @@ class StoreDV(DetailView):
         queryset2 = Store.objects.get(pk=kwargs['pk'])
 
         page = int(request.GET.get('p', 1))     # 댓글 페이징
-        paginator = Paginator(queryset, 5)
+        paginator = Paginator(queryset, 4)
         commments = paginator.get_page(page)
 
         ctx={
