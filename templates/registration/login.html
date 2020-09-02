@@ -9,14 +9,18 @@ height: 40%;
 width: 25%;
 }
 ::placeholder {
-color:white;
+color:black;
+font-size:1.1em;
+}
+.form-group{
+font-weight: bold;
 font-size:1.1em;
 }
 </style>
 <div class="content">
 <form action="." method="post">
     {% csrf_token %}
-    <h1>Login</h1>
+    <h1 style="font-weight:bold;">Login</h1>
     {% if form.errors %}
     <div class="alert alert-danger">
         <div class="font-weight-bold" style="color:white; background-color:red;">
@@ -24,11 +28,11 @@ font-size:1.1em;
         </div>
     </div>
     {% endif %}
-    <div class="form-group" style="color:white;">
-        {{ form.username|attr:"autofocus"|attr:"placeholder=아이디"|attr:"style=color:white;"}}
+    <div class="form-group">
+        {{ form.username|attr:"autofocus"|attr:"placeholder=아이디"}}
     </div>
 
-    <div class="form-group" style="color:white; ">
+    <div class="form-group">
         {{ form.password|attr:"placeholder=비밀번호"}}
     </div>
     <div class="form-group">
