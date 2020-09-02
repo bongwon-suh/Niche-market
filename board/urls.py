@@ -6,8 +6,8 @@ app_name = 'board'
 
 urlpatterns = [
     path('<int:pk>', BoardView.as_view(), name='board'),
-    path('board/<int:fk>>/<int:pk>', BoardViewDV.as_view(), name='board_details'),
-    path('<int:fk>>/board_add/', BoardCreateView.as_view(), name="board_add"),
-    path('<int:pk>/board_update/', BoardUpdateView.as_view(), name="board_update"),
-    path('<int:pk>/board_delete', BoardDeleteView.as_view(), name="board_delete"),
+    path('board_detail/<int:pk>', BoardViewDV.as_view(), name='board_detail'),
+    path('board_add/<int:fk>/', BoardCreateView.as_view(), name="board_add"),
+    path('board_update/<int:pk>/', BoardUpdateView.as_view(), name="board_update"),
+    path('board_delete/<int:pk>/', BoardDeleteView.as_view(), name="board_delete"),
 ]

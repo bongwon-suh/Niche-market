@@ -34,7 +34,7 @@ color: white;
     <tbody>
     <tr>
         {% for board in boards %}
-        <tr onclick="location.href='/market/board/{{board.market_list.id}}/{{board.id}}'">
+        <tr onclick="location.href='{% url 'board:board_detail' board.id %}' ">
         <td>{{board.market}}</td>
         <td>{{board.title}}</td>
         <td>{{board.content}}</td>
