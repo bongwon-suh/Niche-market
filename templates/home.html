@@ -33,7 +33,7 @@
     <div class="container-fluid">
         <div class="row">
             <!--              1번째 카드-->
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="card card-chart" style="background-color:rgba(255,255,255,0.9);">
                     <div class="card-body">
                         <div class="map_wrap">
@@ -44,16 +44,23 @@
             </div>
             <!--              1번째 카드 끝-->
             <!--              2번째 카드-->
-            <div class="col-md-8">
-                <div class="card card-chart" style="background-color:rgba(33,194,242,0.6);">
-                    <div class="card-body">
-                        <tbody>
-                        {% for s in seoul %}
-                        <tr style="color:white;">
-                            <td style="padding:0.65rem;">{{s}}</td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
+            <div class="col-md-7">
+                <div class="card" style="background-color:rgba(134,12,232,0.6);">
+                    <div class="card-header card-header-success" style="text-align: left;"><i
+                            class="fas fa-sign-in-alt"> 서울시 전통시장 행사 안내</i></div>
+
+                    <div class="card-body table-responsive" style="padding-top:0;">
+                        <table class="table table-hover" style="margin-bottom:0;">
+                            <tbody>
+                            {% for seoul in html_content %}
+                            <tr style="color:white;" onclick="location.href='{{seoul.1}}'">
+                                <td style="padding:0.2rem;">{{ seoul.0|safe }}</td>
+                                <td style="padding:0.1rem;">{{ seoul.2|safe }}</td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
