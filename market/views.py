@@ -82,10 +82,34 @@ class MarketUpdateView(OwnerOnlyMixin, UpdateView):
     def get_success_url(self):
         return reverse('market:market', kwargs={'pk': self.object.pk})
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+
+
+        # 파일 삭제
+        # delete_files = self.request.POST["delete_files"]
+        delete_files = self.request.POST.getlist("delete_files")
+        for fid in delete_files:  # fid는 문자열 타입임
+        # 실제 파일 삭제 및 PostAttachFile 삭제
+            file = MarketAttachFile.objects.get(id=int(fid))
+            file_path = os.path.join(settings.MEDIA_ROOT, str(file.upload_file))
+            os.remove(file_path)  # 실제 파일 삭제
+            file.delete()  # 모델 삭제(테이블의 행 삭제)
+
+
+        response = super().form_valid(form)  # Post 모델 저장, self.object
+
+        # 업로드 파일 얻기
+        files = self.request.FILES.getlist("files")
+        for file in files:
+            attach_file = MarketAttachFile(market=self.object, filename=file.name, size=file.size, content_type=file.content_type, upload_file=file)
+            attach_file.save()
+        return response
 
 class MarketDeleteView(OwnerOnlyMixin, DeleteView):
     model = Market
     success_url = reverse_lazy('market:home')
+
 
 
 class StoreLV(ListView):
