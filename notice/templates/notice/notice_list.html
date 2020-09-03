@@ -37,7 +37,7 @@ color:white;
                         </thead>
 
                         <tbody>
-                        {% for board in object_list %}
+                        {% for board in boards %}
                         <tr onclick="location.href='{% url 'notice:notice_detail' board.id %}'">
                             <td>{{board.title}}</td>
                             <td>{{board.owner}}</td>
@@ -53,9 +53,9 @@ color:white;
                     </div>
                     {% endif %}
                     <ul class="pagination justify-content-center">
-                        {% if page_obj.has_previous %}
+                        {% if boards.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{page_obj.previous_page_number}}">이전</a>
+                            <a class="page-link" href="?p={{boards.previous_page_number}}">이전</a>
                         </li>
                         {% else %}
                         <li class="page-item disabled">
@@ -64,12 +64,12 @@ color:white;
                         {% endif %}
 
                         <li class="page-item active">
-                            <a class="page-link">{{page_obj.number}}/{{page_obj.paginator.num_pages}}</a>
+                            <a class="page-link">{{boards.number}}/{{boards.paginator.num_pages}}</a>
                         </li>
 
-                        {% if page_obj.has_next %}
+                        {% if boards.has_next %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{page_obj.next_page_number}}">다음</a>
+                            <a class="page-link" href="?p={{boards.next_page_number}}">다음</a>
                         </li>
                         {% else %}
                         <li class="page-item disabled">
