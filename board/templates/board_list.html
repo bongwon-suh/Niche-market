@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}board_list.html{% endblock %}
 {% block content %}
+<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
 <style>
 .content {
 text-align: center;
@@ -18,11 +19,12 @@ text-align:center;
 background: rgba(255,255,255,0.5);
 color:white;
 }
-
+.hn{font-family: 'Hanna', sans-serif;}
+.target1 { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 </style>
 
 
-<div class="content">
+<div class="content hn">
     <div class="row">
         <div class="col-lg-12">
             <div class="card" style="background-color:rgba(140,200,50,0.6);">
@@ -31,17 +33,19 @@ color:white;
                 <div class="card-body table-responsive" style="padding-top:0;">
                     <table id="store" class="table table-hover" style="margin-bottom:0;">
                         <thead class="text-dark">
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>등록시간</th>
+                        <tr>
+                            <td class="target1" style="padding:0.2rem;width:50%;">제목</td>
+                            <td class="target1" style="padding:0.2rem;width:10%;">작성자</td>
+                            <td class="target1" style="padding:0.2rem;width:40%;">등록시간</td>
+                        </tr>
                         </thead>
 
                         <tbody>
                         {% for board in boards %}
                         <tr onclick="location.href='{% url 'board:board_detail' board.id %}'">
-                            <td>{{board.title}}</td>
-                            <td>{{board.owner}}</td>
-                            <td>{{board.registered_date}}</td>
+                            <td class="target1" style="padding:0.2rem;width:50%;">{{board.title}}</td>
+                            <td class="target1" style="padding:0.2rem;width:10%;">{{board.owner}}</td>
+                            <td class="target1" style="padding:0.2rem;width:40%;">{{board.registered_date}}</td>
                         </tr>
                         {% endfor %}
                         </tbody>
