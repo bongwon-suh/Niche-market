@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.content {
+text-align: center;
+height: 50%;
+width: 50%;
+}
+.table{
+color:white;
+font-size:1.2em;
+}
+td{
+text-align:center;
+}
+#store:hover tbody tr:hover td {
+background: rgba(255,255,255,0.3);
+color: white;
+}
+
+
+
+</style>
+
+<div class="jumbotron">
+    <h1>Notice Detail</h1>
+    <
+    <div>
+        <h1>{{object.title}}</h1>
+        <ul>
+            <li>{{object.content}}</li>
+        </ul>
+            <a button href="{% url 'notice:notice_update' object.id %}",type="button" class="btn btn-outline-success">수정</button></span></a>
+        <a button href="{% url 'notice:notice_delete' object.id %}",type="button" class="btn btn-outline-success">삭제</button></span></a>
+    </div>
+
+
+
+
+
+{% endblock %}
+</div>
