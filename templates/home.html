@@ -25,14 +25,14 @@
                 <div class="card" style="background-color:rgba(134,12,232,0.6);">
                     <div class="card-header card-header-success" style="text-align:left;">
                         <i class="fas fa-sign-in-alt"></i><span class="hn"> 서울시 전통시장 행사 안내</span></div>
-                    <div class="card-body table-responsive" style="padding-top:2px;">
+                    <div class="card-body table-responsive" style="padding-top:2px;overflow:hidden;">
                         <table class="table table-hover" style="margin-bottom:2px;">
                             <tbody>
                             {% for seoul in html_content %}
                                 {% if forloop.counter < 10 %}
                                 <tr style="color:white;" onclick="location.href='{{seoul.1}}'">
-                                    <td style="padding:0.2rem;width:80%;">{{ seoul.0|safe }}</td>
-                                    <td style="padding:0.1rem;width:20%;">{{ seoul.2|safe }}</td>
+                                    <td class="target1" style="padding:0.2rem;width:80%;">{{ seoul.0|safe }}</td>
+                                    <td class="target1" style="padding:0.1rem;width:20%;">{{ seoul.2|safe }}</td>
                                 </tr>
                             {% endif %}
                             {% endfor %}

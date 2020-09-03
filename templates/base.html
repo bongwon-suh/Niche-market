@@ -28,6 +28,8 @@
   outline: none;
 }
 
+.hn{font-family: 'Hanna', sans-serif;}
+
 body {
   margin: 0 auto;
   background: #eee;
@@ -358,6 +360,7 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
   font-size: 3rem;
 }
 
+.target1 { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 
 
@@ -365,7 +368,7 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
     </style>
 </head>
 <body>
-<nav>
+<nav class="hn">
 
     <div class="nav-level">
         <div class="nav-header">
@@ -706,5 +709,6 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
 </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js">
 </script>
+<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
 {% block extra-script %}{% endblock %}
 </html>

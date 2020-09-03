@@ -62,7 +62,7 @@
 
 </style>
 
-<div class="content">
+<div class="content hn">
     <div class="container-fluid">
         <div class="row">
             <!--              1번째 카드-->
@@ -73,7 +73,7 @@
                         {% if market.files.get.id %}
                         <img src="{% url 'market:market_download' market.files.get.id %}">
                         {% else %}
-                        <img class="card-img-top" src="http://placehold.it/300x200">
+                        <img class="card-img-top" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-1.jpg">
                         {% endif %}
                         <!--첨부파일이 없으면 기본 이미지 있으면 대표사진 여기까지-->
                     </div>
@@ -98,22 +98,20 @@
             <div class="col-sm-6">
                 <div class="card" style="background-color:rgba(50,100,180,0.6); color:white;">
                     <div class="card-inner">
-                        <div class="header text-left">
-                            <h4>주소 : {{market.address}}</h4>
-                            <br>
-                            <h4>전화번호 : {{market.tel}}</h4>
-                            <br>
-                            <h4>영업시간 : {{market.hour_info}}</h4>
-                            <br>
-                            <h4>휴무일 : {{market.closed_date}}</h4>
-                            <br>
-                            <h4>판매품목 : {{market.products}}</h4>
-                            <br>
-                            <h4>주차여부 : {{market.park_info}}</h4>
-                            <br>
-                            <h4>주변 관광지 : {{market.sights_info}}</h4>
-                        </div>
-                    </div>
+                        <div class="card-header card-header-success" style="text-align:left;">
+                        <i class="fas fa-sign-in-alt"></i><span class="hn"> 시장 정보</span></div>
+                    <div class="card-body table-responsive" style="padding-top:2px;">
+                        <table class="table table-hover" style="margin-bottom:2px;">
+                            <tbody>
+                                <tr style="color:white;"><td style="padding:0.2rem;width:30%;">주소</td><td style="padding:0.2rem;width:70%;">{{market.address}}</td></tr>
+                                <tr style="color:white;"><td style="padding:0.2rem;width:30%;">전화번호</td><td style="padding:0.2rem;width:70%;">{{market.tel}}</td></tr>
+                                <tr style="color:white;"><td style="padding:0.2rem;width:30%;">영업시간</td><td style="padding:0.2rem;width:70%;">{{market.hour_info}}</td></tr>
+                                <tr style="color:white;"><td style="padding:0.2rem;width:30%;">휴무일</td><td style="padding:0.2rem;width:70%;">{{market.closed_date}}</td></tr>
+                                <tr style="color:white;"><td style="padding:0.2rem;width:30%;">판매품목</td><td style="padding:0.2rem;width:70%;">{{market.products}}</td></tr>
+                                <tr style="color:white;"><td style="padding:0.2rem;width:30%;">주차여부</td><td style="padding:0.2rem;width:70%;">{{market.park_info}}</td></tr>
+                                <tr style="color:white;"><td style="padding:0.2rem;width:30%;">주변 관광지</td><td style="padding:0.2rem;width:70%;">{{market.sights_info}}</td></tr>
+                            </tbody>
+                        </table>
                 </div>
             </div>            <!--              2번째 카드 끝-->
 
