@@ -39,6 +39,9 @@ class Market(models.Model):
         verbose_name = "시장목록"
         verbose_name_plural = "시장목록"
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.market_name, allow_unicode=True)
+        super().save(*args, **kwargs)
 
 class Store(models.Model):
     store_name = models.CharField('STORE NAME', max_length=100)
