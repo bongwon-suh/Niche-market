@@ -49,7 +49,7 @@
 </style>
 
 
-<div class="content">
+<div class="content hn">
     <h1 style="text-align: left;"><i class="fas fa-store">{{market_detail.location}}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{market_detail.market_name}}
     </i></h1>
     <div class="container-fluid">
@@ -58,9 +58,9 @@
             <div class="col-md-4" onclick="location.href='/market/market_detail/{{market_detail.id}}' ">
                 <div class="card card-chart" style="background-color:rgba(38,94,171,0.6);">
                     <div class="card-body">
-                        <br><br>
+                        <br>
                         <i class="fas fa-sign-in-alt" style="font-size:2.3em;">&nbsp;시장 소개</i>
-                        <br><br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -69,9 +69,9 @@
             <div class="col-md-4" onclick="location.href='/market/store/{{market_detail.id}}' ">
                 <div class="card card-chart" style="background-color:rgba(33,194,242,0.6);">
                     <div class="card-body">
-                        <br><br>
+                        <br>
                         <i class="fas fa-sign-in-alt" style="font-size:2.3em;">&nbsp;점포 안내</i>
-                        <br><br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -80,9 +80,9 @@
             <div class="col-md-4" onclick="location.href='{% url 'board:board' market_detail.id %}' ">
                 <div class="card card-chart" style="background-color:rgba(147,218,54,0.6);">
                     <div class="card-body">
-                        <br><br>
+                        <br>
                         <i class="fas fa-sign-in-alt" style="font-size:2.3em;">&nbsp;게시판</i>
-                        <br><br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                     <div class="card-header card-header-success" style="text-align: left;"><i
                             class="fas fa-sign-in-alt"> 네이버 블로그</i></div>
 
-                    <div class="card-body table-responsive" style="padding-top:0;">
+                    <div class="card-body table-responsive" style="padding-top:0;overflow:hidden;">
                         <table class="table table-hover" style="margin-bottom:0;">
                             <tbody>
                             {% for item in items %}

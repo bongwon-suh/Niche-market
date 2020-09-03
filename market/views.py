@@ -82,6 +82,7 @@ class MarketUpdateView(OwnerOnlyMixin, UpdateView):
     def get_success_url(self):
         return reverse('market:market', kwargs={'pk': self.object.pk})
 
+
     def form_valid(self, form):
         form.instance.owner = self.request.user
 
@@ -197,7 +198,6 @@ class StoreUpdateView(OwnerOnlyMixin, UpdateView):
             attach_file = StoreAttachFile(post=self.object, filename=file.name, size=file.size, content_type=file.content_type, upload_file=file)
             attach_file.save()
         return response
-
 
 class StoreDeleteView(OwnerOnlyMixin, DeleteView):
     model = Store
