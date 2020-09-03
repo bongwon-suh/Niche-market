@@ -147,6 +147,17 @@ font-size:1.1em;
                     </div>
 
                     <div class="form-group">
+                        <div>
+                            {% for file in market.files.all %}
+                            <input type="checkbox" name="delete_files" value="{{file.id}}" checked>
+                            {{file.filename}}
+                            <br>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
                         <label for="files" class="font-weight-bold"></label>
                         <div>
                             <input type="file" id="files" name="files">
