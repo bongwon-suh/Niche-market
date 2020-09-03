@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'market.apps.MarketConfig',
     'board.apps.BoardConfig',
     'widget_tweaks',
+    'notice.apps.NoticeConfig',
 ]
 
 MIDDLEWARE = [
