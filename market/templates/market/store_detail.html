@@ -99,10 +99,12 @@ color:white;
                         <div>
                             <div class="text-right">
                                 <!--                                권한 추가시 표시할 부분-->
+                                {% if store.owner == user %}
                                 <a href="{% url 'market:store_update' store.id %}" class="mr-3">
                                     <i class="far fa-edit"></i> 수정</a>
                                 <a href="{% url 'market:store_delete' store.id %}" class="text-danger mr-3">
                                     <i class="fas fa-trash"></i> 삭제</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -158,6 +160,7 @@ color:white;
                                 {% endif %}
                             </ul>
 
+                            {% if user.is_active %}
                             <form action="{% url 'market:store_comment' store.market_list_id store.id %}">
 
                                 <div>
@@ -170,7 +173,7 @@ color:white;
                                     <label for="contactChoice2">2</label>
 
                                     <input type="radio" id="contactChoice3"
-                                           name="score" value="3">
+                                           name="score" value="3" checked>
                                     <label for="contactChoice3">3</label>
 
                                     <input type="radio" id="contactChoice4"
@@ -187,6 +190,7 @@ color:white;
 
                                 <button type="submit" style="color:black;">댓글등록</button>
                             </form>
+                            {% endif %}
 
                         </div>
                     </div>

@@ -84,10 +84,12 @@
                         <div>
                             <div class="text-right">
 <!--                                권한 추가시 표시할 부분-->
+                                {% if market.owner == user %}
                                 <a href="{% url 'market:market_update' market.id %}" class="mr-3">
                                     <i class="far fa-edit"></i> 수정</a>
                                 <a href="{% url 'market:market_delete' market.id %}" class="text-danger mr-3">
                                     <i class="fas fa-trash"></i> 삭제</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

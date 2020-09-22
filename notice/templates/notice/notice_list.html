@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}board_list.html{% endblock %}
+{% block title %}공지사항{% endblock %}
 {% block content %}
 <style>
 .content {
@@ -48,7 +48,7 @@ color:white;
                         {% endfor %}
                         </tbody>
                     </table>
-                    {% if user.is_active %}
+                    {% if user.is_staff %}
                     <div class="text-right mr-3">
                         <a href="{% url 'notice:notice_add' %}" class="btn btn-primary btn-sm">
                             <i class="fas fa-pencil-alt"></i> 쓰기</a>

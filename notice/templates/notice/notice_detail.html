@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}store_detail.html{% endblock %}
+{% block title %}공지사항 상세{% endblock %}
 
 {% block content %}
 
@@ -56,10 +56,12 @@ textarea.form-control{
                             </div>
                             <div class="text-left">
                                 <!--                                권한 추가시 표시할 부분-->
+                                {% if board.owner == user %}
                                 <a href="{% url 'notice:notice_update' board.id %}" class="mr-3">
                                     <i class="far fa-edit"></i> 수정</a>
                                 <a href="{% url 'notice:notice_delete' board.id %}" class="text-danger mr-3">
                                     <i class="fas fa-trash"></i> 삭제</a>
+                                {% endif %}
                             </div>
                             <br>
 
