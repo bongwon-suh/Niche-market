@@ -14,7 +14,7 @@
                 <div class="card card-chart" style="background-color:rgba(255,255,255,0.9);">
                     <div class="card-header card-header-success" style="text-align:left;">
                         <i class="fas fa-sign-in-alt"></i><span class="hn"> 서울시 전통시장 위치</span></div>
-                        <div class="card-body" style="padding:5px;">
+                        <div class="card-body" style="padding:5px;" id="map">
                             {% include "map.html" %}
                         </div>
                 </div>
@@ -74,6 +74,10 @@
 
 <link rel ="stylesheet" type="text/css" href ="/static/Style.css"/>
 <link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
+
+
+<!-- favicon.ico 404 (Not Found) -->
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!--이 안에 작성-->
 {% endblock %}
 

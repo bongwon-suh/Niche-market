@@ -388,7 +388,9 @@ nav.open + .hamburger .hamburger-inner:before, nav.open + .hamburger .hamburger-
                         <li>
                             <a href="{% url 'logout' %}">로그아웃</a>
                             <a href="{% url 'password_change' %}">사용자정보변경</a>
+                            {% if user.is_staff %}
                             <a href="{% url 'market:market_add' %}" class="back-icon">시장추가</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>

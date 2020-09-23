@@ -47,10 +47,10 @@ color:white;
                         {% endfor %}
                         </tbody>
                     </table>
-                    {% if user.is_active %}
+                    {% if user.is_staff %}
                     <div class="text-right mr-3">
                         <a href="{% url 'market:store_add' market_fk%}" class="btn btn-primary btn-sm">
-                            <i class="fas fa-pencil-alt"></i> 쓰기</a>
+                            <i class="fas fa-pencil-alt"></i> 추가</a>
                     </div>
                     {% endif %}
                     <ul class="pagination justify-content-center">

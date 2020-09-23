@@ -126,13 +126,11 @@ var positions = [
     {% for m in market_list %}
     {
         content: [
-'<div class="content2" style="white-space:nowrap;">',
-'   <a href="{% url 'market:market' m.id %}">',
-'      <span class="title">{{m.market_name}}</span>',
-'      <p>{{m.address|linebreaks}}</p>',
-'      <p>{{m.closed_date|linebreaks}}</p>',
-'   </a>',
-'<b><a href="https://map.kakao.com/link/map/{{m.market_name}},{{m.latitude}},{{m.longitude}}" style="color:blue" target="_blank">큰지도보기</a> | <a href="https://map.kakao.com/link/to/{{m.market_name}},{{m.latitude}},{{m.longitude}}" style="color:blue" target="_blank">길찾기</a></b>',
+'<div style="padding:5px; text-align:center;" class="target1">',
+'   <a href="{% url 'market:market' m.id %}"  font-size:1.2rem;">',
+'      {{m.market_name}}</a><br>',
+'      <div style="text-align:center;font-size:0.8rem;">{{m.address|linebreaks}}</div>',
+'<a href="https://map.kakao.com/link/map/{{m.market_name}},{{m.latitude}},{{m.longitude}}" style="color:blue" target="_blank">큰지도보기</a> | <a href="https://map.kakao.com/link/to/{{m.market_name}},{{m.latitude}},{{m.longitude}}" style="color:blue" target="_blank">길찾기</a>',
 '</div>'
 ].join(''),
         latlng: new kakao.maps.LatLng({{m.latitude}}, {{m.longitude}})
